@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply overflow-x-hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Performance optimizations */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Hardware acceleration for animations */
+  .will-change-opacity {
+    will-change: opacity;
+  }
+
+  .will-change-transform {
+    will-change: transform;
+  }
+}
+
+/* Custom cursor styles - Desktop only */
+@media (min-width: 1024px) {
+  .cursor {
+    @apply w-2 h-2 bg-black rounded-full fixed pointer-events-none z-[9999];
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+  }
+
+  .cursor-follower {
+    @apply w-10 h-10 border border-gray-300 rounded-full fixed pointer-events-none z-[9998];
+    transform: translate(-50%, -50%);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .cursor-follower.active {
+    @apply border-black scale-125;
+  }
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  @apply fixed top-0 left-0 h-0.5 bg-black z-[9999];
+  transition: width 0.05s ease;
+}
+
+/* Smooth scroll animation */
+@keyframes scroll-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+.animate-scroll-down {
+  animation: scroll-down 2s ease-in-out infinite;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
